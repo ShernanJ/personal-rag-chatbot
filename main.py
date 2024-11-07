@@ -38,3 +38,21 @@ def read_cohere():
   print(res.message.content[0].text) # "The Ultimate Guide to API Design: Best Practices for Building Robust and Scalable APIs"
 
   return {"res": res.message.content[0].text}
+
+
+class ChatMessage(BaseModel):
+    message: str
+
+@app.post("/cohere/test")
+async def read_cohere_test(chat_message: ChatMessage):
+  res = co.chat(
+    model="command-r-plus-08-2024",
+    messages=[
+        {
+            "role": "user",
+            "content": chat_message.message,
+        }
+    ],
+  )
+
+  return {"response": res.message.content[0].text}
