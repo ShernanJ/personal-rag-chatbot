@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import axios from 'axios'
 import './App.css'
 
@@ -12,6 +12,7 @@ function App() {
   const [input, setInput] = useState('')
   const [messages, setMessages] = useState<Array<Message>>([])
   const [isTyping, setIsTyping] = useState(false)
+  const chatHistoryRef = useRef<HTMLDivElement>(null)
 
   const typeMessage = async (message: string) => {
     setIsTyping(true)
@@ -65,10 +66,21 @@ function App() {
     console.log('Messages updated:', messages);
   }, [messages]);
 
+  // Function to scroll to the bottom of the chat
+  const scrollToBottom = () => {
+    if (chatHistoryRef.current) {
+      chatHistoryRef.current.scrollTop = chatHistoryRef.current.scrollHeight;
+    }
+  }
+
+  useEffect(() => {
+    scrollToBottom(); // Scroll to bottom whenever messages change
+  }, [messages]);
+
   return (
     <>
       <div className='chat-container'>
-        <div className='chat-history'>
+        <div className='chat-history' ref={chatHistoryRef}>
           {
             messages.map((msg, index) => (
               <div key={index} className={`message ${msg.role} ${msg.isTyping ? 'typing' : ''}`}>
