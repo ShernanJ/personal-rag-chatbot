@@ -42,7 +42,7 @@
 }
 
 .chat-container {
-  max-width: 600px;
+  width: 600px;
   margin: 0 auto;
   padding: 20px;
   display: flex;
@@ -63,6 +63,7 @@
   margin-bottom: 12px;
   padding: 8px;
   border-radius: 4px;
+  word-wrap: break-word;
 }
 
 .message.user {
@@ -81,6 +82,36 @@
 .message p {
   margin: 0;
   white-space: pre-wrap;
+  display: inline;
+  position: relative;
+  word-break: break-word;
+  max-width: 100%;
+}
+
+.message.typing p::after {
+  content: '';
+  position: absolute;
+  display: inline;
+  width: 2px;
+  height: 1.2em;
+  background: #fff;
+  margin-left: 2px;
+  animation: cursor-blink 1s infinite;
+  vertical-align: text-bottom;
+}
+
+@keyframes cursor-blink {
+  0%, 100% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+/* Remove the previous border-right style if it exists */
+.message.typing p {
+  border-right: none;
 }
 
 textarea {
@@ -109,4 +140,22 @@ button:hover {
 form {
   display: flex;
   flex-direction: column;
+}
+
+textarea:disabled, button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+button.typing {
+  background-color: #666;
+  cursor: not-allowed;
+}
+
+textarea::placeholder {
+  transition: color 0.3s ease;
+}
+
+textarea:disabled::placeholder {
+  color: #666;
 }
