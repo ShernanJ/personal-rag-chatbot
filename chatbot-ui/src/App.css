@@ -45,6 +45,42 @@
   max-width: 600px;
   margin: 0 auto;
   padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.chat-history {
+  height: 400px;
+  overflow-y: auto;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 16px;
+  background-color: #404040;
+}
+
+.message {
+  margin-bottom: 12px;
+  padding: 8px;
+  border-radius: 4px;
+}
+
+.message.user {
+  background-color: #5aa0d1;
+}
+
+.message.assistant {
+  background-color: #487957;
+}
+
+.message strong {
+  display: block;
+  margin-bottom: 4px;
+}
+
+.message p {
+  margin: 0;
+  white-space: pre-wrap;
 }
 
 textarea {
@@ -52,6 +88,9 @@ textarea {
   min-height: 100px;
   margin-bottom: 10px;
   padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  resize: vertical;
 }
 
 button {
@@ -65,4 +104,9 @@ button {
 
 button:hover {
   background-color: #0056b3;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
 }

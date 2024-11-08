@@ -1,4 +1,5 @@
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, conlist
 import cohere
 from cohere import ClassifyExample
@@ -13,6 +14,14 @@ load_dotenv()
 co = cohere.ClientV2(os.getenv('COHERE_API_KEY'))
 
 app = FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:5173"],  # or whatever port your frontend is running on
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 
 @app.get("/")
