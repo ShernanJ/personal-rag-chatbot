@@ -67,9 +67,16 @@ cd personal-rag-chatbot
 ### Set up environment variables:
 
 Create a `.env` file and add your Cohere API key and database credentials.
+(Refer to `.env.example` file)
 
 ```ssh
 COHERE_API_KEY=<API Key Here>
+```
+
+### Change directory to backend
+
+```ssh
+cd backend/
 ```
 
 ### Install dependencies:
@@ -81,7 +88,15 @@ pip install -r requirements.txt
 ### Run the FastAPI backend:
 
 ```sh
-uvicorn main:app --reload
+fastapi dev main.py
+```
+
+## Optional Frontend to test the Chatbot
+
+### Change directory to frontend
+
+```sh
+cd chatbot-ui/
 ```
 
 ### Start the frontend:
@@ -91,6 +106,11 @@ npm install
 
 npm run dev
 ```
+
+### Open browser
+
+Go to <b><a href="http://localhost:5173">http://localhost:5173</a></b> to see frontend
+
 
 ## Example Questions
 
